@@ -1,0 +1,678 @@
+/* ---------------------------------------------------
+   Global Variables – Light Mode (Cream / White)
+--------------------------------------------------- */
+:root {
+    --bg: #ffffff;
+    --bg-alt: #f6f2ea;
+    --text: #1a1a1a;
+    --text-light: #555;
+    --accent: #c9b38c;
+    --accent-soft: rgba(201, 179, 140, 0.15);
+    --card-bg: #ffffff;
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --radius: 14px;
+    --transition: 0.3s ease;
+    --hero-overlay: rgba(0,0,0,0.30);
+    --hero-overlay-bottom: rgba(0,0,0,0.05);
+}
+/* ---------------------------------------------------
+   Dark Mode
+--------------------------------------------------- */
+.dark-mode {
+    --bg: #0d0d0d;
+    --bg-alt: #1a1a1a;
+    --text: #f0f0f0;
+    --text-light: #bbb;
+    --accent-soft: rgba(201, 179, 140, 0.2);
+    --card-bg: #141414;
+    --nav-bg: rgba(20, 20, 20, 0.8);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------------------------------------------
+   Global
+--------------------------------------------------- */
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    transition: background var(--transition), color var(--transition);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+    border-radius: var(--radius);
+}
+
+/* Logo */
+.site-logo {
+    height: 50px;
+    max-width: 250px;
+    object-fit: contain;
+    border-radius: 0; /* keep logo shape */
+    margin-right: 18px;
+}
+
+/* Skip link (accessibility) */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 9999;
+}
+
+/* ---------------------------------------------------
+   Navigation
+--------------------------------------------------- */
+header {
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(12px);
+    background: var(--nav-bg);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 8px;
+}
+
+/* small screens: hide nav and show toggle */
+@media (max-width: 900px) {
+    header {
+        padding: 12px 20px;
+    }
+    .menu-toggle {
+        display: block;
+        color: var(--text);
+    }
+    nav {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        padding: 18px 20px;
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        gap: 12px;
+    }
+    nav a {
+        margin-left: 0;
+        display: block;
+        padding: 8px 0;
+        font-size: 1rem;
+    }
+    /* when body has nav-open, show nav */
+    body.nav-open nav {
+        display: flex;
+    }
+}
+
+nav a {
+    margin-left: 24px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+/* Dark Mode Button */
+.dark-toggle {
+    margin-left: 30px;
+    padding: 8px 18px;
+    background: var(--accent);
+    border-radius: var(--radius);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dark-toggle:hover {
+    opacity: 0.85;
+}
+
+/* ---------------------------------------------------
+   Hero
+--------------------------------------------------- */
+#main {
+    background-image:
+        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay-bottom)),
+        url('assets/home-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#main-1 {
+    background-image:
+        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay-bottom)),
+        url('assets/tech-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#main-2 {
+    background-image:
+        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay-bottom)),
+        url('assets/1 (5).png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#main-3 {
+    background-image:
+        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay-bottom)),
+        url('assets/53.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#main-4 {
+    background-image:
+        linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay-bottom)),
+        url('assets/cont-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: flex-start;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
+    padding: 120px 40px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.hero p {
+    margin-top: 20px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    color: cornsilk;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 700px) {
+    .hero {
+        padding: 80px 20px;
+        background-position: center top;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .site-logo {
+        height: 40px;
+        margin-right: 10px;
+    }
+    nav a {
+        margin-left: 12px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ---------------------------------------------------
+   Careers split layout
+   Left column: 25% of viewport width, right column: remaining space
+--------------------------------------------------- */
+.careers-split {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    max-width: 1400px;
+    margin: 24px auto;
+    padding: 0 40px;
+}
+
+/* ---------------------------------------------------
+   Updates grid and panel (right side newsletter)
+--------------------------------------------------- */
+.updates-grid {
+    display: grid;
+    /* left content and a larger right panel */
+    grid-template-columns: 1fr 480px;
+    gap: 40px;
+    /* stretch the right panel to match left column total height */
+    align-items: stretch;
+    max-width: 1400px;
+    margin: 24px auto;
+}
+.updates-block {
+    margin-bottom: 20px;
+}
+.updates-block h2 {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+.updates-main {
+    /* left column: make explicit three stacked rows for Research, Events, Articles */
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    gap: 24px;
+}
+.updates-panel {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--accent-soft);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.updates-panel h2 {
+    margin-top: 0;
+}
+.updates-form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+.updates-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: var(--bg-alt);
+}
+.updates-form button {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.updates-panel .recent-updates {
+    margin-top: auto; /* push recent links to bottom if panel is taller */
+}
+.recent-updates ul {
+    margin: 12px 0 0 18px;
+}
+.recent-updates li {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 900px) {
+    .updates-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+    .updates-panel {
+        order: 2;
+    }
+}
+.careers-left {
+    flex: 0 0 25vw; /* 25% of viewport width */
+    min-width: 240px;
+    max-width: 420px;
+}
+.careers-right {
+    flex: 1 1 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+.collab-list {
+    list-style: disc;
+    margin-left: 18px;
+    color: var(--text-light);
+}
+.collab-form-wrap {
+    margin-top: 20px;
+    background: var(--card-bg);
+    padding: 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--accent-soft);
+}
+.collab-form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+.collab-form input,
+.collab-form textarea {
+    width: 95%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: var(--bg-alt);
+}
+.collab-form button {
+    margin-top: 12px;
+    padding: 10px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .careers-split {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    .careers-left {
+        width: 100%;
+        flex: none;
+        order: 2; /* place form after listings if preferred; change to 1 to keep on top */
+    }
+    .careers-right {
+        order: 1;
+    }
+}
+
+/* Dark mode hero overlay tweak */
+.dark-mode {
+    --hero-overlay: rgba(0,0,0,0.55);
+    --hero-overlay-bottom: rgba(0,0,0,0.25);
+}
+
+.hero p {
+    margin-top: 20px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* ---------------------------------------------------
+   Section
+--------------------------------------------------- */
+.section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* ---------------------------------------------------
+   Cards
+--------------------------------------------------- */
+.card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid var(--accent-soft);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Grid Layout */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* ---------------------------------------------------
+   Contact Form
+--------------------------------------------------- */
+form {
+    max-width: 600px;
+    margin: auto;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 14px;
+    margin-top: 16px;
+    background: var(--bg-alt);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Button */
+button {
+    padding: 14px 24px;
+    margin-top: 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+/* ---------------------------------------------------
+   Pre-Footer
+--------------------------------------------------- */
+.pre-footer {
+    background: var(--bg-alt);
+    padding: 40px;
+    margin-top: 60px;
+}
+.pre-footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 32px;
+}
+.pre-footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px;
+}
+.footer-logo {
+    height: 200px;
+    max-width: 300px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+.pre-footer-logo p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+.pre-footer-col h3 {
+    margin-top: 0;
+    font-size: 1rem;
+}
+.pre-footer-col p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.pre-footer-col p a {
+    color: var(--accent);
+    text-decoration: none;
+}
+.pre-footer-col p a:hover {
+    text-decoration: underline;
+}
+.social-links,
+.footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.social-links li,
+.footer-links li {
+    margin-bottom: 6px;
+}
+.social-links a,
+.footer-links a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.social-links a:hover,
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .pre-footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pre-footer {
+        padding: 24px 20px;
+    }
+    .pre-footer-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .pre-footer-logo {
+        order: -1; /* keep logo at top on mobile */
+    }
+}
+
+/* ---------------------------------------------------
+   Footer
+--------------------------------------------------- */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: var(--bg-alt);
+    margin-top: 0;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--accent-soft);
+}
+
+/* ---------------------------------------------------
+   Hero (Technology Page)
+--------------------------------------------------- */
+
+/* Features grid: larger two-by-two layout */
+.features-grid {
+    display: grid;
+    /* two columns so the four items form two rows */
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin: 48px auto;
+    padding: 0 40px;
+}
+.feature-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--accent-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: contain;
+    justify-content: center;
+    padding: 32px;
+    aspect-ratio: 1 / 1;
+    text-align: left;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+}
+.feature-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.3rem;
+    text-align: center;
+}
+.feature-card p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 1.05rem;
+}
+
+@media (max-width: 1100px) {
+    .features-grid {
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
+        gap: 32px;
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 900px) {
+    /* stack into a single column on narrow screens */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px;
+    }
+}
+
