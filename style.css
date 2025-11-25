@@ -150,6 +150,15 @@ nav a:hover {
     color: var(--accent);
 }
 
+/* Active nav link — keep highlighted when on that page */
+nav a.active,
+nav a.active:hover {
+    color: var(--accent);
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
 /* Dark Mode Button */
 .dark-toggle {
     margin-left: 30px;
