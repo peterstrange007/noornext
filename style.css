@@ -450,6 +450,7 @@ nav a:hover {
    Cards
 --------------------------------------------------- */
 .card {
+    font-size: 1.3rem;
     background: var(--card-bg);
     padding: 40px;
     border-radius: var(--radius);
