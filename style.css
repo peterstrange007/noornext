@@ -473,6 +473,62 @@ nav a.active:hover {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
+/* Job card specific styles on Careers page */
+.job-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.job-card .job-meta {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+.job-card .job-summary {
+    margin: 0;
+    color: var(--text);
+}
+.job-actions {
+    margin-top: 8px;
+}
+.job-actions .btn,
+.job-actions a.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+/* Apply form on job detail page */
+.apply-form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+.apply-form input[type="text"],
+.apply-form input[type="email"],
+.apply-form textarea,
+.apply-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: var(--bg-alt);
+}
+.apply-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+.apply-actions .btn {
+    padding: 10px 16px;
+}
+
 /* Grid Layout */
 .grid-3 {
     display: grid;

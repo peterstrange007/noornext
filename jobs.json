@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Radiologist (General Radiology Expert)",
+    "location": "Hyderabad, India",
+    "type": "Consultant",
+    "summary": "Serve as primary clinical authority for imaging; validate AI models, supervise imaging quality, and annotate datasets.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Radiologist",
+    "details": "<h4>Job Description</h4><p>The Radiologist will serve as the primary clinical authority for all imaging-related aspects of the Eco-Scanner. They will validate AI models, supervise imaging quality, annotate datasets, and ensure that the product meets medical-grade diagnostic standards. This role requires close collaboration with AI/ML engineers, biomedical engineers, and clinical partners.</p><h4>Key Responsibilities</h4><ul><li>Conduct detailed review of X-ray images and provide clinical validation of AI-generated outputs.</li><li>Annotate thousands of X-ray images to create high-quality ground truth datasets.</li><li>Define imaging standards, contrast levels, and acceptable diagnostic thresholds for device evaluation.</li><li>Provide feedback to AI team on false positives, false negatives, and algorithmic shortcomings.</li><li>Develop imaging protocols for clinical pilots and test environments.</li><li>Participate in internal audits, regulatory submissions, and quality assurance processes.</li><li>Train annotation teams and provide clinical oversight during dataset creation.</li></ul><h4>Requirements</h4><ul><li>MBBS + MD/DNB in Radiology (mandatory).</li><li>3–10 years of experience in general radiology.</li><li>Expertise in digital radiography, DICOM, PACS, and QA standards.</li><li>Strong understanding of imaging noise, exposure settings, and radiographic abnormalities.</li><li>Experience in AI/medical device R&D is an advantage.</li></ul>"
+  },
+  {
+    "title": "Oncologist",
+    "location": "Hyderabad, India",
+    "type": "Consultant",
+    "summary": "Provide expert input for AI solutions in cancer detection, curate oncological datasets and validate AI predictions.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Oncologist",
+    "details": "<h4>Job Description</h4><p>The Oncologist will provide expert input in the development of AI solutions for cancer detection and staging. They will help curate oncological datasets, validate AI predictions, and ensure alignment with oncology workflows.</p><h4>Responsibilities</h4><ul><li>Review AI-assisted findings related to lung, bone, and soft-tissue malignancies.</li><li>Validate datasets for cancer-related abnormalities.</li><li>Provide expert interpretation for ambiguous or complex clinical images.</li><li>Advise on screening protocols and diagnostic pathways.</li><li>Support research publications and clinical trials.</li></ul><h4>Requirements</h4><ul><li>MD/DNB in Oncology.</li><li>3+ years of experience interpreting diagnostic imaging for cancer.</li><li>Familiarity with early detection, screening pathways, and staging systems.</li></ul>"
+  },
+  {
+    "title": "Radiation Oncologist",
+    "location": "Hyderabad, India",
+    "type": "Consultant",
+    "summary": "Guide tumor localization, imaging-based treatment planning, and validation of oncological imaging AI models.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Radiation%20Oncologist",
+    "details": "<h4>Job Description</h4><p>Provides specialized guidance on tumor localization, imaging-based treatment planning, and validation of AI models for oncological imaging.</p><h4>Responsibilities</h4><ul><li>Evaluate tumor-focused AI models and imaging workflows.</li><li>Review treatment-relevant imaging findings.</li><li>Support clinical trial design with imaging criteria.</li><li>Guide dataset selection for cancer-related anomalies.</li></ul><h4>Requirements</h4><ul><li>MD/DNB in Radiation Oncology.</li><li>Experience with radiography in cancer diagnosis and treatment planning.</li></ul>"
+  },
+  {
+    "title": "Chest Physician / Pulmonologist",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Validate lung-related AI models; annotate chest X-rays for TB, pneumonia and other respiratory conditions.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Pulmonologist",
+    "details": "<h4>Job Description</h4><p>The Pulmonologist will serve as the subject-matter expert for AI models focused on respiratory diseases. This role is crucial for validating lung-related findings and ensuring high sensitivity for conditions like TB, pneumonia, and COVID-19.</p><h4>Responsibilities</h4><ul><li>Review chest X-rays and validate AI outputs for pulmonary abnormalities.</li><li>Annotate datasets with findings such as consolidation, nodules, fibrosis, cavities, and effusions.</li><li>Design classification criteria for respiratory diseases.</li><li>Support government and NGO-led screening pilots.</li><li>Help refine protocols for mobile screening units.</li></ul><h4>Requirements</h4><ul><li>MD/DNB in Pulmonology/Respiratory Medicine.</li><li>Strong experience interpreting chest imaging.</li><li>Experience in TB or infectious disease programs is a plus.</li></ul>"
+  },
+  {
+    "title": "Orthopedic Specialist",
+    "location": "Hyderabad, India",
+    "type": "Part-time",
+    "summary": "Support fracture detection and musculoskeletal imaging model development and validation.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Orthopedic%20Specialist",
+    "details": "<h4>Job Description</h4><p>Supports development of AI models for fracture detection, joint assessment, and musculoskeletal imaging.</p><h4>Responsibilities</h4><ul><li>Annotate fracture lines, bone deformities, and joint abnormalities.</li><li>Validate AI predictions on orthopedic datasets.</li><li>Provide insights for emergency trauma-care workflows.</li><li>Guide improvements in model sensitivity and specificity.</li></ul><h4>Requirements</h4><ul><li>MS/DNB Orthopedics.</li><li>3+ years experience reviewing X-ray-based orthopedic cases.</li></ul>"
+  },
+  {
+    "title": "TB Specialist / Public Health Physician",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Ensure AI solution alignment with national TB programs and global screening guidelines; support pilots and training.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20TB%20Specialist",
+    "details": "<h4>Job Description</h4><p>This role ensures that the AI solution aligns with national TB program requirements and global TB-screening guidelines.</p><h4>Responsibilities</h4><ul><li>Validate TB-detection models and grading systems.</li><li>Help curate datasets representing diverse TB cases and presentations.</li><li>Provide training for field health workers on imaging-based TB screening.</li><li>Support partnerships with NGOs, NTEP, and local health programs.</li><li>Contribute to research publications, grant applications, and pilot designs.</li></ul><h4>Requirements</h4><ul><li>MD Community Medicine/Chest Medicine.</li><li>Experience with TB screening programs (RNTCP/NTEP preferred).</li><li>Familiarity with WHO and national guidelines for TB diagnostics.</li></ul>"
+  },
+  {
+    "title": "Clinical Research Manager",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Plan and execute clinical research, manage IRB approvals, coordinate sites, and ensure regulatory compliance.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Clinical%20Research%20Manager",
+    "details": "<h4>Job Description</h4><p>Manages the planning, execution, and regulatory compliance of all clinical research activities, including pilots, trials, and ethical approvals.</p><h4>Responsibilities</h4><ul><li>Design clinical studies for device validation and AI model accuracy testing.</li><li>Obtain and maintain IRB/IEC approvals for research activities.</li><li>Coordinate with hospitals, NGOs, and government facilities.</li><li>Ensure compliance with GCP, ICH guidelines, and clinical documentation standards.</li><li>Manage patient recruitment, data monitoring, and site studies.</li><li>Prepare clinical reports, safety documentation, and regulatory files.</li></ul><h4>Requirements</h4><ul><li>Master’s in Public Health, Life Sciences, or Clinical Research.</li><li>4–10 years of clinical trial management experience.</li><li>Strong understanding of ethics, regulatory pathways, and medical device trials.</li></ul>"
+  },
+  {
+    "title": "Medical Data Annotator (X-Ray Annotation Team)",
+    "location": "Hyderabad, India",
+    "type": "Contract",
+    "summary": "Perform high-quality annotation of X-ray images according to protocols defined by radiologists.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Data%20Annotator",
+    "details": "<h4>Job Description</h4><p>Responsible for high-quality annotation of medical imaging data for AI model training.</p><h4>Responsibilities</h4><ul><li>Perform detailed labeling, segmentation, region marking, and classification on X-ray images.</li><li>Follow strict annotation protocols designed by radiologists.</li><li>Ensure consistency, accuracy, and confidentiality of datasets.</li><li>Provide feedback on image issues, dataset gaps, or anomalies.</li><li>Maintain logs, reports, and annotation quality metrics.</li></ul><h4>Requirements</h4><ul><li>Life Science/Biomedical background or Radiology Technician training.</li><li>Understanding of basic medical imaging concepts.</li><li>Experience with annotation tools (Labelbox, VIA, Roboflow) preferred.</li></ul>"
+  },
+  {
+    "title": "AI/ML Engineer (Deep Learning – Medical Imaging)",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Develop deep learning models for automated disease detection, handle preprocessing, training and deployment.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20AI%2FML%20Engineer",
+    "details": "<h4>Job Description</h4><p>Develops state-of-the-art deep learning models for automated disease detection and imaging analysis.</p><h4>Responsibilities</h4><ul><li>Build CNN, transformer, and hybrid models for X-ray interpretation.</li><li>Perform data preprocessing, augmentation, and model training at scale.</li><li>Implement model performance optimization and quantization for edge devices.</li><li>Work with clinicians to define training labels and model evaluation metrics.</li><li>Deploy models via APIs, cloud inferencing, or on-device modules.</li><li>Conduct error analysis, cross-validation, and benchmarking.</li></ul><h4>Requirements</h4><ul><li>Bachelor’s/Master’s/PhD in CS, AI/ML, or similar.</li><li>Strong Python, PyTorch/TensorFlow experience.</li><li>Experience in medical imaging algorithms (bonus).</li></ul>"
+  },
+  {
+    "title": "Cloud Architect / DevOps Engineer",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Build secure, scalable cloud systems, CI/CD pipelines, and ensure compliant data storage for ML pipelines.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Cloud%20Architect",
+    "details": "<h4>Job Description</h4><p>Responsible for building secure, highly scalable cloud systems supporting AI pipelines, tele-radiology workflows, and medical data storage.</p><h4>Responsibilities</h4><ul><li>Architect cloud-based infrastructure (AWS/Azure/GCP).</li><li>Build CI/CD pipelines for deploying ML models, APIs, and applications.</li><li>Implement load balancing, autoscaling, and system monitoring.</li><li>Ensure HIPAA-compliant data storage and encryption.</li><li>Manage deployment of microservices and containerized environments.</li></ul><h4>Requirements</h4><ul><li>4+ years in Cloud/DevOps engineering.</li><li>Expertise with Kubernetes, Docker, Terraform, CI/CD.</li><li>Understanding of healthcare data security standards (preferred).</li></ul>"
+  },
+  {
+    "title": "Cybersecurity & Data Protection Officer",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Implement data protection and cybersecurity standards (HIPAA/GDPR/DPDP), lead audits and incident response.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Cybersecurity%20Officer",
+    "details": "<h4>Job Description</h4><p>Ensures protection of sensitive health data and compliance with global privacy regulations.</p><h4>Responsibilities</h4><ul><li>Implement HIPAA, GDPR, DPDP Act, and ISO 27001 standards.</li><li>Conduct periodic cybersecurity audits and risk assessments.</li><li>Monitor threats, intrusion attempts, and vulnerability reports.</li><li>Develop internal cybersecurity policies and training.</li><li>Lead incident response and data breach mitigation.</li></ul><h4>Requirements</h4><ul><li>Certifications like CISSP, CISM, CEH preferred.</li><li>Experience in healthcare cybersecurity or regulated industries.</li></ul>"
+  },
+  {
+    "title": "Biomedical Engineer (Hardware)",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Design and test X-ray hardware components, ensure compliance with medical device standards and prototype hardware.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Biomedical%20Engineer",
+    "details": "<h4>Job Description</h4><p>Designs and tests the X-ray hardware components ensuring safety, reliability, and compliance with medical device regulations.</p><h4>Responsibilities</h4><ul><li>Develop X-ray generator systems, detectors, and shielding.</li><li>Conduct electrical, radiation, and mechanical safety tests.</li><li>Ensure compliance with IEC 60601 and other medical device standards.</li><li>Support hardware prototyping, testing, and optimization.</li><li>Work with mechanical and electronics teams for system integration.</li></ul><h4>Requirements</h4><ul><li>B.Tech/M.Tech in Biomedical Engineering.</li><li>Experience in imaging devices or diagnostic hardware.</li></ul>"
+  },
+  {
+    "title": "Electrical/Electronics Engineer",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Design and optimize electrical systems, PCBs, power units and ensure EMI/EMC and safety compliance.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Electrical%20Engineer",
+    "details": "<h4>Job Description</h4><p>Builds and optimizes electrical systems for the Eco-Scanner, including power units, batteries, and circuit boards.</p><h4>Responsibilities</h4><ul><li>Design PCB circuits and embedded electronic modules.</li><li>Build and test power delivery and battery management systems.</li><li>Address EMI/EMC compliance and electrical safety.</li><li>Improve device durability, power efficiency, and thermal performance.</li></ul><h4>Requirements</h4><ul><li>B.Tech/M.Tech in EEE/ECE.</li><li>Experience with embedded hardware design tools.</li></ul>"
+  },
+  {
+    "title": "Mechanical / Industrial Design Engineer",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Create CAD designs, conduct simulations and optimize manufacturability and ergonomics of the device.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Mechanical%20Engineer",
+    "details": "<h4>Job Description</h4><p>Designs the structural and ergonomic elements of the portable X-ray machine.</p><h4>Responsibilities</h4><ul><li>Create CAD designs for chassis, mounts, and internal structures.</li><li>Conduct simulations for stress, vibration, and thermal behavior.</li><li>Develop lightweight yet durable frameworks using carbon fiber or composites.</li><li>Optimize manufacturability and industrial aesthetics.</li><li>Coordinate with vendors for prototype fabrication.</li></ul><h4>Requirements</h4><ul><li>B.Tech/M.Tech Mechanical/Industrial Design.</li><li>Expertise with SolidWorks, CATIA, Fusion 360, or similar tools.</li></ul>"
+  },
+  {
+    "title": "Embedded Systems Engineer",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Develop real-time firmware for device control, manage microcontrollers and communication protocols.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Embedded%20Engineer",
+    "details": "<h4>Job Description</h4><p>Develops real-time firmware that drives the X-ray device’s control systems and ensures reliable communication between components.</p><h4>Responsibilities</h4><ul><li>Write firmware for sensor control, radiation timing, and image acquisition.</li><li>Manage microcontrollers, ADCs/DACs, and communication protocols (SPI, I2C, UART).</li><li>Implement safety checks, interrupts, and real-time processing pipelines.</li><li>Optimize power consumption and firmware performance.</li></ul><h4>Requirements</h4><ul><li>Expertise in C/C++, RTOS, and embedded system debugging.</li><li>Experience with medical or safety-critical systems preferred.</li></ul>"
+  },
+  {
+    "title": "Optics / Imaging Systems Engineer",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Optimize imaging quality through detector calibration, denoising, and imaging experiments to improve preprocessing.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Optics%20Engineer",
+    "details": "<h4>Job Description</h4><p>Optimizes imaging quality through detector calibration, image enhancement, and control of radiographic parameters.</p><h4>Responsibilities</h4><ul><li>Calibrate detectors for consistent image output and low noise.</li><li>Develop image enhancement, denoising, and correction algorithms.</li><li>Evaluate MTF, SNR, resolution, and detector performance metrics.</li><li>Work closely with AI team to improve preprocessing for models.</li><li>Conduct imaging experiments and document results.</li></ul><h4>Requirements</h4><ul><li>Degree in Optics, Physics, Imaging Science, or similar.</li><li>Experience with radiography, sensors, or image processing algorithms.</li></ul>"
+  },
+  {
+    "title": "Product Manager (Medical Devices)",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Define product roadmap, prioritize features, and coordinate cross-functional teams to deliver clinical-grade products.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Product%20Manager",
+    "details": "<h4>Job Description</h4><p>Define product roadmap and coordinate cross-functional delivery of clinical-grade devices and software.</p><h4>Responsibilities</h4><ul><li>Prioritize features, align clinical and engineering teams, and manage releases.</li><li>Gather clinical requirements and translate into product specs.</li><li>Coordinate pilot deployments and feedback collection.</li></ul><h4>Requirements</h4><ul><li>Experience in medical device product management or related field.</li></ul>"
+  },
+  {
+    "title": "Quality & Validation Engineer",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Lead verification and validation activities, test plans, and ensure product quality across hardware and software.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Quality%20Engineer",
+    "details": "<h4>Job Description</h4><p>Lead verification and validation activities to ensure product quality across hardware and software.</p><h4>Responsibilities</h4><ul><li>Develop test plans, execute V&V, and document results.</li><li>Coordinate system-level validation and reliability testing.</li></ul><h4>Requirements</h4><ul><li>Experience in medical device validation or similar regulated products.</li></ul>"
+  },
+  {
+    "title": "Regulatory Affairs Specialist",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Prepare regulatory submissions, maintain compliance with medical device regulations and coordinate with authorities.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Regulatory%20Specialist",
+    "details": "<h4>Job Description</h4><p>Prepare regulatory submissions, maintain compliance with medical device regulations and coordinate with authorities.</p><h4>Responsibilities</h4><ul><li>Compile regulatory documentation and submissions.</li><li>Coordinate with notified bodies and regulatory agencies.</li></ul><h4>Requirements</h4><ul><li>Experience with medical device regulatory pathways.</li></ul>"
+  },
+  {
+    "title": "Clinical Data Manager",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "summary": "Manage clinical datasets, ensure data integrity, and prepare documentation for analysis and regulatory review.",
+    "apply": "mailto:contact.noornext@gmail.com?subject=Application%20-%20Clinical%20Data%20Manager",
+    "details": "<h4>Job Description</h4><p>Manage clinical datasets, ensure data integrity, and prepare documentation for analysis and regulatory review.</p><h4>Responsibilities</h4><ul><li>Maintain curated datasets, ensure consistency and quality.</li><li>Provide data exports and reports for teams and regulators.</li></ul><h4>Requirements</h4><ul><li>Experience in clinical data management and regulatory submissions.</li></ul>"
+  }
+]

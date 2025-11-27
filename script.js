@@ -91,6 +91,68 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
     setActiveNavLink();
+
+    // Jobs loader: try fetching external jobs.json, fallback to inline #jobs-data
+    const loadJobs = async () => {
+      // try fetch first (works when served over HTTP)
+      try {
+        const res = await fetch('jobs.json', { cache: 'no-store' });
+        if (res.ok) {
+          return await res.json();
+        }
+      } catch (e) {
+        // ignore and fallback to inline
+      }
+
+      // fallback: inline JSON in page
+      const jobsScript = document.getElementById('jobs-data');
+      if (jobsScript) {
+        try { return JSON.parse(jobsScript.textContent || '[]'); } catch (e) { return []; }
+      }
+      return [];
+    };
+
+    // Renderer with simple pagination
+    const renderJobsPaged = async ({ perPage = 6 } = {}) => {
+      const jobs = await loadJobs();
+      const container = document.getElementById('jobs-list');
+      if (!container) return;
+
+      let page = 1;
+      const totalPages = Math.max(1, Math.ceil(jobs.length / perPage));
+
+      const jobToHtml = (job, idx) => {
+        const safe = s => (s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        // link to job detail page
+        const detailUrl = `job.html?id=${idx}`;
+        return `\n<div class="card job-card">\n  <h3>${safe(job.title)}</h3>\n  <div class="job-meta">${safe(job.location)} • ${safe(job.type)}</div>\n  <p class="job-summary">${safe(job.summary)}</p>\n  <div class="job-actions">\n    <a class="btn" href="${detailUrl}" target="_self" rel="noopener">Apply</a>\n  </div>\n</div>`;
+      };
+
+      const renderPage = p => {
+        const start = (p-1)*perPage;
+        const slice = jobs.slice(start, start + perPage);
+        if (slice.length === 0) container.innerHTML = '<p>No open positions at the moment.</p>';
+        else container.innerHTML = slice.map((job,i) => jobToHtml(job, start + i)).join('\n');
+
+        // pager
+        let pager = document.getElementById('jobs-pager');
+        if (!pager) {
+          pager = document.createElement('div');
+          pager.id = 'jobs-pager';
+          pager.style.marginTop = '16px';
+          container.parentNode.insertBefore(pager, container.nextSibling);
+        }
+        pager.innerHTML = ` <button ${p<=1? 'disabled': ''} data-action="prev">Prev</button> <span> ${p} / ${totalPages} </span> <button ${p>=totalPages? 'disabled': ''} data-action="next">Next</button>`;
+        pager.querySelector('[data-action=prev]').onclick = () => { if (page>1) { page--; renderPage(page); } };
+        pager.querySelector('[data-action=next]').onclick = () => { if (page<totalPages) { page++; renderPage(page); } };
+      };
+
+      renderPage(page);
+    };
+
+    // Only run jobs renderer on pages that include #jobs-list
+    renderJobsPaged({ perPage: 6 });
+
   } catch (err) {
     // log errors to help debugging in console
     console.error('Mobile menu init error:', err);
