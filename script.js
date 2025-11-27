@@ -153,6 +153,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only run jobs renderer on pages that include #jobs-list
     renderJobsPaged({ perPage: 6 });
 
+    // Ensure updates panel height matches left column exactly (fix visual mismatch)
+    const adjustUpdatesPanel = () => {
+      try {
+        const main = document.querySelector('.updates-main');
+        const panel = document.querySelector('.updates-panel');
+        if (!main || !panel) return;
+        // compute height of left column including gaps
+        const height = main.getBoundingClientRect().height;
+        panel.style.height = `${Math.ceil(height)}px`;
+      } catch (e) {
+        // ignore
+      }
+    };
+    // run on load and resize (debounced)
+    let _resizeTimer = null;
+    adjustUpdatesPanel();
+    window.addEventListener('resize', () => {
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(adjustUpdatesPanel, 120);
+    });
+
   } catch (err) {
     // log errors to help debugging in console
     console.error('Mobile menu init error:', err);
