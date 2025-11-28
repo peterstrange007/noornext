@@ -297,7 +297,7 @@ nav a.active:hover {
     margin: 24px auto;
 }
 .updates-block {
-    margin-bottom: 20px;
+    margin: 0; /* use gap on parent to space blocks */
 }
 .updates-block h2 {
     margin-top: 0;
