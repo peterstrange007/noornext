@@ -287,8 +287,9 @@ nav a.active:hover {
    Updates grid and panel (right side newsletter)
 --------------------------------------------------- */
 .updates-grid {
-    display: flex;
+    display: grid;
     /* left content and a larger right panel */
+    grid-template-columns: 1fr 480px;
     gap: 40px;
     /* stretch the right panel to match left column total height */
     align-items: stretch;
@@ -296,7 +297,7 @@ nav a.active:hover {
     margin: 24px auto;
 }
 .updates-block {
-    margin: 0; /* use gap on parent to space blocks */
+    margin: 20; /* use gap on parent to space blocks */
 }
 .updates-block h2 {
     margin-top: 0;
@@ -316,8 +317,8 @@ nav a.active:hover {
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
+    align-content: stretch;
     /* remove forced 100% height: container's align-items:stretch will make it match left column */
-    height: auto;
 }
 .updates-panel h2 {
     margin-top: 0;
