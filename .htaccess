@@ -24,15 +24,6 @@ Options +FollowSymlinks -MultiViews
 RewriteCond %{THE_REQUEST} \s/([^.]+)\.html[?\s] [NC]
 RewriteRule ^([^.]+)\.html$ /%1 [R=301,L]
 
-# Redirect index and site root to /home (external)
-# This makes URLs show /home instead of / or /index.html
-RewriteCond %{THE_REQUEST} \s/index(?:\.html)?[\s?] [NC]
-RewriteRule ^index(?:\.html)?$ /home [R=301,L]
-RewriteRule ^$ /home [R=301,L]
-
-# Internally serve /home from index.html
-RewriteRule ^home/?$ /index.html [L]
-
 # Serve file.html when user visits /file
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
