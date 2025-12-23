@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>NoorNext | Internship Detail</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="logo/logo-1.png" />
+    <link rel="apple-touch-icon" href="logo/logo.png" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Quick runtime marker to confirm scripts run -->
+    <script>
+      try {
+        const m = document.createElement("div");
+        m.id = "dev-marker";
+        m.style.cssText =
+          "position:fixed;top:8px;right:8px;background:#0b74de;color:#fff;padding:6px 8px;border-radius:6px;z-index:99999;font-family:sans-serif;font-size:12px";
+        m.textContent = "JS: running";
+        document.body.appendChild(m);
+      } catch (e) {
+        /* ignore */
+      }
+    </script>
+    <header>
+      <a href="index.html" aria-label="Go to homepage"
+        ><img src="logo/logo-1.png" alt="NoorNext" class="site-logo"
+      /></a>
+      <button class="menu-toggle" aria-label="Open menu">
+        <img src="icons/menu-logo.png" />
+      </button>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="technology.html">Technology</a>
+        <a href="careers.html">Career</a>
+        <a href="updates.html">Updates</a>
+        <a href="contact.html">Contact Us</a>
+        <button id="toggle-dark" class="dark-toggle">Dark Mode</button>
+      </nav>
+    </header>
+
+    <main class="section">
+      <div
+        id="internship-detail"
+        class="card"
+        style="max-width: 900px; margin: auto"
+      ></div>
+      <div
+        style="max-width: 900px; margin: 16px auto; text-align: center"
+      ></div>
+    </main>
+
+    <script>
+      // parse id from querystring
+      function qs(key) {
+        const p = new URLSearchParams(location.search);
+        return p.get(key);
+      }
+      const id = parseInt(qs("id"), 10);
+      const container = document.getElementById("internship-detail");
+
+        const renderNotFound = (reason) => {
+          const qs = location.search || '(none)';
+          const debug = reason ? `<pre style="white-space:pre-wrap">${reason}</pre>` : '';
+          container.innerHTML =
+            `<h2>Internship not found</h2><p><a href="internship.html">Back to Internships</a></p>${debug}<p>Query: ${qs}</p>`;
+          console.warn('Internship detail not found:', { reason, query: location.search });
+        };
+
+      const loadAndRender = async () => {
+        try {
+          // show loading marker
+          try { container.innerHTML = '<p>Loading internship details…</p>'; } catch (e) {}
+          let internships = null;
+            try {
+              const res = await fetch("internships.json", { cache: "no-store" });
+              if (res.ok) {
+                internships = await res.json();
+              }
+            } catch (e) {
+              // fetch failed (likely file://). We'll try inline data below.
+            }
+
+          // fallback: inline JSON in page (for file:// viewing)
+          if (!Array.isArray(internships)) {
+            const internshipsScript = document.getElementById('internships-data');
+            if (internshipsScript) {
+              try {
+                internships = JSON.parse(internshipsScript.textContent || '[]');
+              } catch (e) {
+                internships = [];
+              }
+            }
+          }
+              if (!Array.isArray(internships)) {
+                renderNotFound('No internships data available (fetch failed and no inline fallback).');
+                return;
+              }
+
+            if (isNaN(id)) {
+              renderNotFound('Missing or invalid `id` query parameter.');
+              return;
+            }
+
+              if (id < 0 || id >= internships.length) {
+                renderNotFound(`Requested id ${id} is out of range (0..${Math.max(0, internships.length-1)}).`);
+                return;
+              }
+          }
+        const internship = internships[id];
+        const idealFor = internship.ideal_for ? `<p class="ideal-for"><strong>Ideal for:</strong> ${internship.ideal_for}</p>` : '';
+        const rolesHtml = Array.isArray(internship.roles) && internship.roles.length > 0
+          ? `<h3>Roles & Responsibilities</h3><ul>${internship.roles.map(r => `<li>${r}</li>`).join('')}</ul>`
+          : '';
+
+        container.innerHTML = `\n          <h1>${internship.title}</h1>\n          ${idealFor}\n          <div class="job-meta">${internship.location || ''} ${internship.type ? ' • ' + internship.type : ''} ${internship.duration ? ' • ' + internship.duration : ''}</div>\n          <div class="job-details">${internship.details ? internship.details : '<p>' + (internship.description || internship.summary || '') + '</p>'}</div>\n          ${rolesHtml}\n\n          <form id="apply-form" class="apply-form" enctype="multipart/form-data" novalidate>\n            <label for="app-name">Full name</label>\n            <input id="app-name" name="name" type="text" required>\n\n            <label for="app-email">Email</label>\n            <input id="app-email" name="email" type="email" required>\n\n            <label for="app-college">College / Organization</label>\n            <input id="app-college" name="college" type="text" required>\n\n            <label for="app-note">Note</label>\n            <textarea id="app-note" name="note" rows="4" required></textarea>\n\n            <label for="app-resume">Upload resume (PDF only)</label>\n            <input id="app-resume" name="resume" type="file" accept="application/pdf" required>\n\n            <div class="apply-actions" style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">\n              <button type="button" class="btn" id="go-back">Back</button>\n              <button type="submit" class="btn primary">Submit</button>\n            </div>\n            <div id="apply-message" aria-live="polite" style="margin-top:12px"></div>\n          </form>\n        `;
+
+          // wire up form
+          const form = document.getElementById("apply-form");
+          const msg = document.getElementById("apply-message");
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            msg.textContent = "";
+            const name = document.getElementById("app-name").value.trim();
+            const email = document.getElementById("app-email").value.trim();
+            const college = document.getElementById("app-college").value.trim();
+            const note = document.getElementById("app-note").value.trim();
+            const resumeInput = document.getElementById("app-resume");
+            const file = resumeInput.files && resumeInput.files[0];
+            if (!name || !email || !college || !note || !file) {
+              msg.textContent =
+                "Please fill all required fields and upload your resume (PDF).";
+              return;
+            }
+            if (file.type !== "application/pdf") {
+              msg.textContent = "Resume must be a PDF file.";
+              return;
+            }
+            if (file.size > 10 * 1024 * 1024) {
+              msg.textContent = "Resume must be smaller than 10MB.";
+              return;
+            }
+
+            const subject = encodeURIComponent(
+              `Application: ${internship.title}`
+            );
+            const bodyLines = [
+              `Name: ${name}`,
+              `Email: ${email}`,
+              `College / Organization: ${college}`,
+              "",
+              `Note:`,
+              `${note}`,
+              "",
+              "Please attach my resume (PDF) to this email before sending.",
+            ];
+            const body = encodeURIComponent(bodyLines.join("\n"));
+            const applyTo =
+              internship.apply || "mailto:contact.noornext@gmail.com";
+            const mailto = `${applyTo.replace(
+              "mailto:",
+              "mailto:"
+            )}?subject=${subject}&body=${body}`;
+
+            msg.textContent =
+              "Opening your email client. Please attach the PDF resume to the email and send.";
+            window.location.href = mailto;
+          });
+
+          const goBackBtn = document.getElementById("go-back");
+          if (goBackBtn)
+            goBackBtn.addEventListener("click", () => {
+              location.href = "internship.html";
+            });
+        } catch (err) {
+          console.error('internship load error', err);
+          try { container.innerHTML = `<h2>Error</h2><pre style="white-space:pre-wrap">${String(err && (err.message || err))}</pre><p><a href="internship.html">Back to Internships</a></p>`; } catch(e){}
+        }
+      };
+      loadAndRender();
+    </script>
+
+    <footer>
+      © 2025 <strong>NoorNext</strong> Company. All rights reserved.
+    </footer>
+  </body>
+</html>

@@ -1,55 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>NoorNext | Job Detail</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="logo/logo-1.png">
-  <link rel="apple-touch-icon" href="logo/logo.png">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <a href="index.html" aria-label="Go to homepage"><img src="logo/logo-1.png" alt="NoorNext" class="site-logo"></a>
-    <button class="menu-toggle" aria-label="Open menu">☰</button>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="technology.html">Technology</a>
-      <a href="careers.html">Career</a>
-      <a href="updates.html">Updates</a>
-      <a href="contact us.html">Contact Us</a>
-      <button id="toggle-dark" class="dark-toggle">Dark Mode</button>
-    </nav>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <title>NoorNext | Job Detail</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="logo/logo-1.png" />
+    <link rel="apple-touch-icon" href="logo/logo.png" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="index.html" aria-label="Go to homepage"
+        ><img src="logo/logo-1.png" alt="NoorNext" class="site-logo"
+      /></a>
+      <button class="menu-toggle" aria-label="Open menu">
+        <img src="icons/menu-logo.png" />
+      </button>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="technology.html">Technology</a>
+        <a href="careers.html">Career</a>
+        <a href="updates.html">Updates</a>
+        <a href="contact.html">Contact Us</a>
+        <button id="toggle-dark" class="dark-toggle">Dark Mode</button>
+      </nav>
+    </header>
 
-  <main class="section">
-    <div id="job-detail" class="card" style="max-width:900px;margin:auto;"></div>
-    <div style="max-width:900px;margin:16px auto;text-align:center;"></div>
-  </main>
+    <main class="section">
+      <div
+        id="job-detail"
+        class="card"
+        style="max-width: 900px; margin: auto"
+      ></div>
+      <div
+        style="max-width: 900px; margin: 16px auto; text-align: center"
+      ></div>
+    </main>
 
-  <footer>
-    © 2025 NoorNext Company. All rights reserved.
-  </footer>
+    <script>
+      // parse id
+      function qs(key) {
+        const p = new URLSearchParams(location.search);
+        return p.get(key);
+      }
+      const id = parseInt(qs("id"), 10);
+      const container = document.getElementById("job-detail");
 
-  <script>
-    // parse id
-    function qs(key){ const p = new URLSearchParams(location.search); return p.get(key); }
-    const id = parseInt(qs('id'),10);
-    const container = document.getElementById('job-detail');
+      const renderNotFound = () => {
+        container.innerHTML =
+          '<h2>Job not found</h2><p><a href="careers.html">Back to Careers</a></p>';
+      };
 
-    const renderNotFound = () => { container.innerHTML = '<h2>Job not found</h2><p><a href="careers.html">Back to Careers</a></p>'; };
-
-    const loadAndRender = async () => {
-      try {
-        const res = await fetch('jobs.json', {cache:'no-store'});
-        if (!res.ok) { renderNotFound(); return; }
-        const jobs = await res.json();
-        if (!Array.isArray(jobs) || isNaN(id) || id < 0 || id >= jobs.length) { renderNotFound(); return; }
-        const job = jobs[id];
-        container.innerHTML = `
+      const loadAndRender = async () => {
+        try {
+          const res = await fetch("jobs.json", { cache: "no-store" });
+          if (!res.ok) {
+            renderNotFound();
+            return;
+          }
+          const jobs = await res.json();
+          if (
+            !Array.isArray(jobs) ||
+            isNaN(id) ||
+            id < 0 ||
+            id >= jobs.length
+          ) {
+            renderNotFound();
+            return;
+          }
+          const job = jobs[id];
+          container.innerHTML = `
           <h1>${job.title}</h1>
           <div class="job-meta">${job.location} • ${job.type}</div>
-          <div class="job-details">${job.details ? job.details : '<p>'+ (job.summary||'') +'</p>'}</div>
+          <div class="job-details">${
+            job.details ? job.details : "<p>" + (job.summary || "") + "</p>"
+          }</div>
 
           <form id="apply-form" class="apply-form" enctype="multipart/form-data" novalidate>
             <label for="app-name">Full name</label>
@@ -72,63 +99,72 @@
           </form>
         `;
 
-        // wire up form
-        const form = document.getElementById('apply-form');
-        const msg = document.getElementById('apply-message');
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          msg.textContent = '';
-          const name = document.getElementById('app-name').value.trim();
-          const email = document.getElementById('app-email').value.trim();
-          const note = document.getElementById('app-note').value.trim();
-          const resumeInput = document.getElementById('app-resume');
-          const file = resumeInput.files && resumeInput.files[0];
-          if (!name || !email || !note || !file) {
-            msg.textContent = 'Please fill all required fields and upload your resume (PDF).';
-            return;
-          }
-          if (file.type !== 'application/pdf') {
-            msg.textContent = 'Resume must be a PDF file.';
-            return;
-          }
-          if (file.size > 10 * 1024 * 1024) { // 10MB limit
-            msg.textContent = 'Resume must be smaller than 10MB.';
-            return;
-          }
+          // wire up form
+          const form = document.getElementById("apply-form");
+          const msg = document.getElementById("apply-message");
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            msg.textContent = "";
+            const name = document.getElementById("app-name").value.trim();
+            const email = document.getElementById("app-email").value.trim();
+            const note = document.getElementById("app-note").value.trim();
+            const resumeInput = document.getElementById("app-resume");
+            const file = resumeInput.files && resumeInput.files[0];
+            if (!name || !email || !note || !file) {
+              msg.textContent =
+                "Please fill all required fields and upload your resume (PDF).";
+              return;
+            }
+            if (file.type !== "application/pdf") {
+              msg.textContent = "Resume must be a PDF file.";
+              return;
+            }
+            if (file.size > 10 * 1024 * 1024) {
+              // 10MB limit
+              msg.textContent = "Resume must be smaller than 10MB.";
+              return;
+            }
 
-          // Prepare mailto fallback (note: mailto cannot attach files). We open the user's email client with prefilled fields and instruct them to attach resume.
-          const subject = encodeURIComponent(`Application: ${job.title}`);
-          const bodyLines = [
-            `Name: ${name}`,
-            `Email: ${email}`,
-            '',
-            `Note:`,
-            `${note}`,
-            '',
-            'Please attach my resume (PDF) to this email before sending.'
-          ];
-          const body = encodeURIComponent(bodyLines.join('\n'));
-          const mailto = `${job.apply.replace('mailto:','mailto:')}?subject=${subject}&body=${body}`;
+            // Prepare mailto fallback (note: mailto cannot attach files). We open the user's email client with prefilled fields and instruct them to attach resume.
+            const subject = encodeURIComponent(`Application: ${job.title}`);
+            const bodyLines = [
+              `Name: ${name}`,
+              `Email: ${email}`,
+              "",
+              `Note:`,
+              `${note}`,
+              "",
+              "Please attach my resume (PDF) to this email before sending.",
+            ];
+            const body = encodeURIComponent(bodyLines.join("\n"));
+            const mailto = `${job.apply.replace(
+              "mailto:",
+              "mailto:"
+            )}?subject=${subject}&body=${body}`;
 
-          // notify and open mail client
-          msg.textContent = 'Opening your email client. Please attach the PDF resume to the email and send.';
-          // open mailto in a new window/tab to trigger email client
-          window.location.href = mailto;
-        });
-        // Go back button behavior
-        const goBackBtn = document.getElementById('go-back');
-        if (goBackBtn) goBackBtn.addEventListener('click', () => { location.href = 'careers.html'; });
-      } catch (err) {
-        console.error('job load error', err);
-        container.innerHTML = '<h2>Error loading job details</h2><p>Make sure the site is served over HTTP so `jobs.json` can be fetched.</p><p><a href="careers.html">Back to Careers</a></p>';
-      }
-    };
-    loadAndRender();
-  </script>
+            // notify and open mail client
+            msg.textContent =
+              "Opening your email client. Please attach the PDF resume to the email and send.";
+            // open mailto in a new window/tab to trigger email client
+            window.location.href = mailto;
+          });
+          // Go back button behavior
+          const goBackBtn = document.getElementById("go-back");
+          if (goBackBtn)
+            goBackBtn.addEventListener("click", () => {
+              location.href = "careers.html";
+            });
+        } catch (err) {
+          console.error("job load error", err);
+          container.innerHTML =
+            '<h2>Error loading job details</h2><p>Make sure the site is served over HTTP so `jobs.json` can be fetched.</p><p><a href="careers.html">Back to Careers</a></p>';
+        }
+      };
+      loadAndRender();
+    </script>
 
-  <footer>
-    © 2025 <strong>NoorNext</strong> Company. All rights reserved.
-  </footer>
-
-</body>
+    <footer>
+      © 2025 <strong>NoorNext</strong> Company. All rights reserved.
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,35 @@
+# ------------------------------------
+# Force HTTPS and remove www
+# ------------------------------------
+RewriteEngine On
+RewriteBase /
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove www
+RewriteCond %{HTTP_HOST} ^www\.noornext\.com [NC]
+RewriteRule ^ https://noornext.com%{REQUEST_URI} [L,R=301]
+
+
+# ------------------------------------
+# Remove .html from URLs
+# ------------------------------------
+
+# Avoid conflicts
+Options +FollowSymlinks -MultiViews
+
+# Redirect .html → extensionless
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.html[?\s] [NC]
+RewriteRule ^([^.]+)\.html$ /%1 [R=301,L]
+
+# Serve file.html when user visits /file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^.]+)$ $1.html [L]
+
+# ------------------------------------
+# End
+# ------------------------------------
