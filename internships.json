@@ -3,6 +3,7 @@
     "id": 1,
     "title": "Electromagnetism / Medical Physics",
     "ideal_for": "Physics, Medical Physics, Applied Physics, or Engineering students",
+    "duration": "Duration: 6-12 months",
     "roles": [
       "Research on electromagnetism, X-ray generation, and radiation physics",
       "Assist in optimization of X-ray sources, detectors, and radiation shielding",
@@ -14,6 +15,7 @@
     "id": 2,
     "title": "Cancer Research (Oncology / Radiation Oncology)",
     "ideal_for": "Medical, Life Sciences, Biotechnology, or Public Health students",
+    "duration": "Duration: 6-12 months",
     "roles": [
       "Support research on cancer diagnostics, imaging, and early detection",
       "Conduct literature reviews and assist in clinical data analysis",
@@ -24,6 +26,7 @@
     "id": 3,
     "title": "Human Cell Biology",
     "ideal_for": "Cell Biology, Molecular Biology, Biotechnology, or Life Sciences students",
+    "duration": "Duration: 6-12 months",
     "roles": [
       "Assist in research related to cellular mechanisms, cancer cell biology, and disease progression",
       "Conduct literature reviews on tumor biology, biomarkers, and cellular responses to radiation",
@@ -35,6 +38,7 @@
     "id": 4,
     "title": "Graphic Designer",
     "ideal_for": "Design, Multimedia, or Creative Arts students",
+    "duration": "Duration: 3-6 months",
     "roles": [
       "Design creative assets for presentations, pitch decks, brochures, website, and social media",
       "Create infographics to explain medical, AI, and imaging concepts",
@@ -45,6 +49,7 @@
     "id": 5,
     "title": "Social Media Marketing & Content Creator",
     "ideal_for": "Marketing, Mass Communication, Media, or Communication students",
+    "duration": "Duration: 3-6 months",
     "roles": [
       "Create and manage content for LinkedIn, Instagram, Twitter/X, and other platforms",
       "Write blogs and posts on healthcare, cancer awareness, AI, and innovation",

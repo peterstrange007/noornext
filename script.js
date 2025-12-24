@@ -178,8 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!container) return;
 
       const safe = s => (s || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      const itemToHtml = (it, idx) => {
-          const detailUrl = `internship-detail.html?id=${idx}`;
+        const itemToHtml = (it, idx) => {
+          const detailId = (it && (typeof it.id === 'number' || /^(?:\d+)$/.test(String(it.id)))) ? it.id : idx;
+          const detailUrl = `internship-detail.html?id=${detailId}`;
           const meta = `${safe(it.location)}${it.type ? ' • ' + safe(it.type) : ''}${it.duration ? ' • ' + safe(it.duration) : ''}`;
           const ideal = it.ideal_for ? `<div class="ideal-for">Ideal for: ${safe(it.ideal_for)}</div>` : '';
           return `\n<div class="card job-card">\n  <h3>${safe(it.title)}</h3>\n  ${ideal}\n  <div class="job-meta">${meta}</div>\n  <p class="job-summary">${safe(it.description || it.summary || '')}</p>\n  <div class="job-actions">\n    <a class="btn" href="${detailUrl}" target="_self" rel="noopener">Apply</a>\n  </div>\n</div>`;

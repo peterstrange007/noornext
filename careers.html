@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>NoorNext | Careers</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="logo/br-icon.png">
-    <link rel="apple-touch-icon" href="logo/logo.png">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="shortcut icon" href="favicon.svg" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="logo/logo-1.png" />
+    <link rel="apple-touch-icon" href="logo/logo.png" />
+    <link rel="shortcut icon" href="logo/logo-head.png" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -48,7 +47,7 @@
 
                 <div class="collab-form-wrap">
                     <h3>Start a collaboration</h3>
-                    <form class="collab-form" action="#" method="post">
+                    <form id="collab-form" class="collab-form" action="#" method="post" novalidate>
                         <label for="org">Organization</label>
                         <input id="org" name="organization" type="text" required>
 
@@ -64,11 +63,12 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" placeholder="Describe the collaboration opportunity" required></textarea>
 
-                        <button type="submit">Send Collaboration Request</button>
+                        <button type="submit">Send</button>
+                        <div id="collab-message" aria-live="polite" style="margin-top:12px"></div>
                     </form>
                 </div>
 
-                <div class="careers-left">
+                <div class="careers-left" style="padding-top: 50%;">
                     <h2>Internship Opportunities</h2>
                     <p>We offer internships across various domains to provide hands-on experience in healthcare technology. Explore our current openings below:</p>
                     <div class="internship-button">
@@ -139,7 +139,53 @@
         © 2025 <strong>NoorNext</strong> Company. All rights reserved.
     </footer>
 
+    <script>
+      // Set your backend URL here after deploying the backend
+      window.BACKEND_URL = 'https://api.noornext.com';  // Deployed backend URL
+    </script>
     <script src="script.js"></script>
+    <script>
+      // Handle collaboration form submission
+      document.getElementById('collab-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msg = document.getElementById('collab-message');
+        msg.textContent = '';
+
+        const organization = document.getElementById('org').value.trim();
+        const contact = document.getElementById('contact').value.trim();
+        const designation = document.getElementById('designation').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (!organization || !contact || !designation || !email || !message) {
+          msg.textContent = 'Please fill all required fields.';
+          return;
+        }
+
+        const backend = (window.BACKEND_URL || '') + '/apply/collaboration';
+        const fd = new FormData();
+        fd.append('organization', organization);
+        fd.append('contact', contact);
+        fd.append('designation', designation);
+        fd.append('email', email);
+        fd.append('message', message);
+
+        try {
+          msg.textContent = 'Sending...';
+          const res = await fetch(backend, { method: 'POST', body: fd });
+          const json = await res.json().catch(() => null);
+          if (!res.ok) {
+            msg.textContent = (json && json.error) || 'Submission failed';
+            return;
+          }
+          msg.textContent = (json && json.message) || 'Collaboration inquiry sent. Thank you!';
+          document.getElementById('collab-form').reset();
+        } catch (err) {
+          console.error(err);
+          msg.textContent = 'Submission failed — check your network or try again later.';
+        }
+      });
+    </script>
 </body>
 
 </html>
