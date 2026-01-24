@@ -184,7 +184,7 @@
               return;
             }
 
-            const backend = (window.BACKEND_URL || "") + "/apply/internship";
+            const backend = (window.BACKEND_URL ? (window.BACKEND_URL + "/apply/internship") : "/backend/form-handler.php?type=internship");
             const fd = new FormData();
             fd.append("name", name);
             fd.append("email", email);

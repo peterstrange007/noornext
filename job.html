@@ -129,7 +129,7 @@
               return;
             }
 
-            const backend = (window.BACKEND_URL || "") + "/apply/job";
+            const backend = (window.BACKEND_URL ? (window.BACKEND_URL + "/apply/job") : "/backend/form-handler.php?type=job");
             const fd = new FormData();
             fd.append("name", name);
             fd.append("email", email);

@@ -38,7 +38,8 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: Arial, sans-serif;
-    transition: background var(--transition), color var(--transition);
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
@@ -151,8 +152,7 @@ nav a:hover {
 }
 
 /* Active nav link — keep highlighted when on that page */
-nav a.active,
-nav a.active:hover {
+nav a.active {
     color: var(--accent);
     font-weight: 800;
     text-decoration: underline;
