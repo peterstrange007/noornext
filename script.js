@@ -1,223 +1,244 @@
-// ---------------------
-// Dark Mode Toggle
-// ---------------------
-const toggleBtn = document.getElementById("toggle-dark");
+(function () {
+  const endpoint = (type) => `backend/form-handler.php?type=${encodeURIComponent(type)}`;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-if (toggleBtn) {
-  toggleBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
-  });
-}
+  const escapeHtml = (value) =>
+    String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
-// Load saved mode
-if (localStorage.getItem("darkMode") === "true") {
-  document.body.classList.add("dark-mode");
-}
+  const showMessage = (node, text, state = "") => {
+    if (!node) return;
+    node.textContent = text;
+    node.className = state ? `form-message ${state}` : "form-message";
+  };
 
+  const submitForm = async ({ type, form, messageNode, extra = {}, requireFile = false }) => {
+    const fd = new FormData(form);
+    Object.entries(extra).forEach(([key, value]) => fd.set(key, value || ""));
 
-// ---------------------
-// Scroll Animations
-// ---------------------
-const animatedElements = document.querySelectorAll(".fade-up, .scale-in");
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animationPlayState = "running";
+    const email = String(fd.get("email") || "").trim();
+    if (!emailPattern.test(email)) {
+      showMessage(messageNode, "Please enter a valid email address.", "error");
+      return;
     }
-  });
-}, { threshold: 0.2 });
 
-animatedElements.forEach(el => observer.observe(el));
-
-// ---------------------
-// Mobile menu toggle (robust initialization)
-// ---------------------
-document.addEventListener('DOMContentLoaded', () => {
-  try {
-    const menuButtons = document.querySelectorAll('.menu-toggle');
-    if (!menuButtons || menuButtons.length === 0) return;
-
-    menuButtons.forEach(btn => {
-      // ensure button has explicit type to avoid accidental form submit
-      if (!btn.hasAttribute('type')) btn.setAttribute('type', 'button');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.addEventListener('click', () => {
-        const isOpen = document.body.classList.toggle('nav-open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    });
-
-    // Close menu when a nav link is clicked (mobile)
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.body.classList.remove('nav-open');
-        menuButtons.forEach(b => b.setAttribute('aria-expanded', 'false'));
-      });
-    });
-
-    // Highlight the current page's nav link and set aria-current
-    const setActiveNavLink = () => {
-      const links = document.querySelectorAll('nav a');
-      let current = location.pathname.split('/').pop();
-      if (!current) current = 'index.html';
-      current = decodeURIComponent(current);
-
-      links.forEach(link => {
-        const href = link.getAttribute('href');
-        if (!href) return;
-        try {
-          const linkUrl = new URL(href, location.origin);
-          const linkFile = decodeURIComponent(linkUrl.pathname.split('/').pop());
-          if (linkFile === current) {
-            link.classList.add('active');
-            link.setAttribute('aria-current', 'page');
-          } else {
-            link.classList.remove('active');
-            link.removeAttribute('aria-current');
-          }
-        } catch (e) {
-          // fallback: compare raw href filename
-          const linkFile = decodeURIComponent(href.split('/').pop());
-          if (linkFile === current) {
-            link.classList.add('active');
-            link.setAttribute('aria-current', 'page');
-          } else {
-            link.classList.remove('active');
-            link.removeAttribute('aria-current');
-          }
-        }
-      });
-    };
-    setActiveNavLink();
-
-    // Jobs loader: try fetching external jobs.json, fallback to inline #jobs-data
-    const loadJobs = async () => {
-      // try fetch first (works when served over HTTP)
-      try {
-        const res = await fetch('jobs.json', { cache: 'no-store' });
-        if (res.ok) {
-          return await res.json();
-        }
-      } catch (e) {
-        // ignore and fallback to inline
-      }
-
-      // fallback: inline JSON in page
-      const jobsScript = document.getElementById('jobs-data');
-      if (jobsScript) {
-        try { return JSON.parse(jobsScript.textContent || '[]'); } catch (e) { return []; }
-      }
-      return [];
-    };
-
-    // Renderer with simple pagination
-    const renderJobsPaged = async ({ perPage = 6 } = {}) => {
-      const jobs = await loadJobs();
-      const container = document.getElementById('jobs-list');
-      if (!container) return;
-
-      let page = 1;
-      const totalPages = Math.max(1, Math.ceil(jobs.length / perPage));
-
-      const jobToHtml = (job, idx) => {
-        const safe = s => (s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-        // link to job detail page
-        const detailUrl = `job.html?id=${idx}`;
-        return `\n<div class="card job-card">\n  <h3>${safe(job.title)}</h3>\n  <div class="job-meta">${safe(job.location)} • ${safe(job.type)}</div>\n  <p class="job-summary">${safe(job.summary)}</p>\n  <div class="job-actions">\n    <a class="btn" href="${detailUrl}" target="_self" rel="noopener">Apply</a>\n  </div>\n</div>`;
-      };
-
-      const renderPage = p => {
-        const start = (p-1)*perPage;
-        const slice = jobs.slice(start, start + perPage);
-        if (slice.length === 0) container.innerHTML = '<p>No open positions at the moment.</p>';
-        else container.innerHTML = slice.map((job,i) => jobToHtml(job, start + i)).join('\n');
-
-        // pager
-        let pager = document.getElementById('jobs-pager');
-        if (!pager) {
-          pager = document.createElement('div');
-          pager.id = 'jobs-pager';
-          pager.style.marginTop = '16px';
-          container.parentNode.insertBefore(pager, container.nextSibling);
-        }
-        pager.innerHTML = ` <button ${p<=1? 'disabled': ''} data-action="prev">Prev</button> <span> ${p} / ${totalPages} </span> <button ${p>=totalPages? 'disabled': ''} data-action="next">Next</button>`;
-        pager.querySelector('[data-action=prev]').onclick = () => { if (page>1) { page--; renderPage(page); } };
-        pager.querySelector('[data-action=next]').onclick = () => { if (page<totalPages) { page++; renderPage(page); } };
-      };
-
-      renderPage(page);
-    };
-
-    // Only run jobs renderer on pages that include #jobs-list
-    renderJobsPaged({ perPage: 6 });
-
-    // Internships renderer: populate #internships-list and link to internship-detail.html
-    const loadInternships = async () => {
-      try {
-        const res = await fetch('internships.json', { cache: 'no-store' });
-        if (res.ok) return await res.json();
-      } catch (e) {
-        // ignore and fallback
-      }
-      const internshipsScript = document.getElementById('internships-data');
-      if (internshipsScript) {
-        try {
-          return JSON.parse(internshipsScript.textContent || '[]');
-        } catch (e) {
-          return [];
-        }
-      }
-      return [];
-    };
-
-    const renderInternships = async () => {
-      const internships = await loadInternships();
-      const container = document.getElementById('internships-list');
-      if (!container) return;
-
-      const safe = s => (s || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        const itemToHtml = (it, idx) => {
-          const detailId = (it && (typeof it.id === 'number' || /^(?:\d+)$/.test(String(it.id)))) ? it.id : idx;
-          const detailUrl = `internship-detail.html?id=${detailId}`;
-          const meta = `${safe(it.location)}${it.type ? ' • ' + safe(it.type) : ''}${it.duration ? ' • ' + safe(it.duration) : ''}`;
-          const ideal = it.ideal_for ? `<div class="ideal-for">Ideal for: ${safe(it.ideal_for)}</div>` : '';
-          return `\n<div class="card job-card">\n  <h3>${safe(it.title)}</h3>\n  ${ideal}\n  <div class="job-meta">${meta}</div>\n  <p class="job-summary">${safe(it.description || it.summary || '')}</p>\n  <div class="job-actions">\n    <a class="btn" href="${detailUrl}" target="_self" rel="noopener">Apply</a>\n  </div>\n</div>`;
-        };
-
-      if (!Array.isArray(internships) || internships.length === 0) {
-        container.innerHTML = '<p>No internships available at the moment.</p>';
+    const file = form.querySelector('input[type="file"]')?.files?.[0];
+    if (requireFile && !file) {
+      showMessage(messageNode, "Please upload your resume as a PDF.", "error");
+      return;
+    }
+    if (file) {
+      if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+        showMessage(messageNode, "Resume must be a PDF file.", "error");
         return;
       }
-      container.innerHTML = internships.map((it, i) => itemToHtml(it, i)).join('\n');
-    };
-
-    renderInternships();
-
-    // Ensure updates panel height matches left column exactly (fix visual mismatch)
-    const adjustUpdatesPanel = () => {
-      try {
-        const main = document.querySelector('.updates-main');
-        const panel = document.querySelector('.updates-panel');
-        if (!main || !panel) return;
-        // compute height of left column including gaps
-        const height = main.getBoundingClientRect().height;
-        panel.style.height = `${Math.ceil(height)}px`;
-      } catch (e) {
-        // ignore
+      if (file.size > 10 * 1024 * 1024) {
+        showMessage(messageNode, "Resume must be smaller than 10 MB.", "error");
+        return;
       }
+    }
+
+    try {
+      showMessage(messageNode, "Submitting...", "pending");
+      const res = await fetch(endpoint(type), { method: "POST", body: fd });
+      const json = await res.json().catch(() => null);
+      const text = (json && (json.message || json.error)) || "Submission failed. Please try again.";
+      if (!res.ok || !json || json.success === false) {
+        showMessage(messageNode, text, "error");
+        return;
+      }
+      showMessage(messageNode, text, "success");
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      showMessage(messageNode, "Submission failed. Please check your connection and try again.", "error");
+    }
+  };
+
+  const initTheme = () => {
+    const toggle = document.getElementById("toggle-dark");
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+    }
+    if (!toggle) return;
+    toggle.type = "button";
+    const syncLabel = () => {
+      toggle.textContent = document.body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
     };
-    // run on load and resize (debounced)
-    let _resizeTimer = null;
-    adjustUpdatesPanel();
-    window.addEventListener('resize', () => {
-      clearTimeout(_resizeTimer);
-      _resizeTimer = setTimeout(adjustUpdatesPanel, 120);
+    syncLabel();
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", String(document.body.classList.contains("dark-mode")));
+      syncLabel();
+    });
+  };
+
+  const initNavigation = () => {
+    const menuButtons = document.querySelectorAll(".menu-toggle");
+    menuButtons.forEach((button) => {
+      button.type = "button";
+      button.setAttribute("aria-expanded", "false");
+      button.addEventListener("click", () => {
+        const isOpen = document.body.classList.toggle("nav-open");
+        button.setAttribute("aria-expanded", String(isOpen));
+      });
     });
 
-  } catch (err) {
-    // log errors to help debugging in console
-    console.error('Mobile menu init error:', err);
-  }
-});
+    document.querySelectorAll("nav a").forEach((link) => {
+      const current = decodeURIComponent(location.pathname.split("/").pop() || "index.html");
+      const target = decodeURIComponent((link.getAttribute("href") || "").split("/").pop());
+      if (target === current) {
+        link.classList.add("active");
+        link.setAttribute("aria-current", "page");
+      }
+      link.addEventListener("click", () => {
+        document.body.classList.remove("nav-open");
+        menuButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
+      });
+    });
+  };
+
+  const initRevealAnimations = () => {
+    const elements = document.querySelectorAll(".section, .card, .feature-card, .job-card, .updates-panel");
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    elements.forEach((element) => {
+      element.classList.add("reveal");
+      observer.observe(element);
+    });
+  };
+
+  const loadJson = async (path) => {
+    const res = await fetch(path, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Failed to load ${path}`);
+    return res.json();
+  };
+
+  const renderJobs = async () => {
+    const container = document.getElementById("jobs-list");
+    if (!container) return;
+
+    try {
+      const jobs = await loadJson("jobs.json");
+      if (!Array.isArray(jobs) || jobs.length === 0) {
+        container.innerHTML = '<p class="empty-state">No open positions at the moment.</p>';
+        return;
+      }
+      container.innerHTML = jobs
+        .map(
+          (job, index) => `
+            <article class="job-card">
+              <div>
+                <h3>${escapeHtml(job.title)}</h3>
+                <p class="job-meta">${escapeHtml(job.location)} &middot; ${escapeHtml(job.type)}</p>
+              </div>
+              <p>${escapeHtml(job.summary)}</p>
+              <a class="btn" href="job.html?id=${index}">Apply Now</a>
+            </article>
+          `
+        )
+        .join("");
+    } catch (error) {
+      console.error(error);
+      container.innerHTML = '<p class="empty-state">Unable to load open positions right now.</p>';
+    }
+  };
+
+  const renderInternships = async () => {
+    const container = document.getElementById("internships-list");
+    if (!container) return;
+
+    try {
+      const internships = await loadJson("internships.json");
+      if (!Array.isArray(internships) || internships.length === 0) {
+        container.innerHTML = '<p class="empty-state">No internships available at the moment.</p>';
+        return;
+      }
+      container.innerHTML = internships
+        .map((item, index) => {
+          const detailId = Number.isInteger(Number(item.id)) ? item.id : index;
+          const meta = [item.location, item.type, item.duration].filter(Boolean).map(escapeHtml).join(" &middot; ");
+          return `
+            <article class="job-card">
+              <div>
+                <h3>${escapeHtml(item.title)}</h3>
+                ${item.ideal_for ? `<p class="job-meta">Ideal for: ${escapeHtml(item.ideal_for)}</p>` : ""}
+                <p class="job-meta">${meta}</p>
+              </div>
+              <p>${escapeHtml(item.description || item.summary || "")}</p>
+              <a class="btn" href="internship-detail.html?id=${detailId}">Apply Now</a>
+            </article>
+          `;
+        })
+        .join("");
+    } catch (error) {
+      console.error(error);
+      container.innerHTML = '<p class="empty-state">Unable to load internships right now.</p>';
+    }
+  };
+
+  const initStaticForms = () => {
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity();
+          return;
+        }
+        submitForm({
+          type: "contact",
+          form: contactForm,
+          messageNode: document.getElementById("contact-response"),
+        });
+      });
+    }
+
+    const collabForm = document.getElementById("collab-form");
+    if (collabForm) {
+      collabForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!collabForm.checkValidity()) {
+          collabForm.reportValidity();
+          return;
+        }
+        submitForm({
+          type: "collaboration",
+          form: collabForm,
+          messageNode: document.getElementById("collab-message"),
+        });
+      });
+    }
+  };
+
+  window.NoorNext = {
+    escapeHtml,
+    loadJson,
+    submitForm,
+  };
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    initTheme();
+    initNavigation();
+    initStaticForms();
+    await Promise.all([renderJobs(), renderInternships()]);
+    initRevealAnimations();
+  });
+})();

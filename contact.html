@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NoorNext | Contact Us</title>
     <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="logo/logo-1.png" />
@@ -15,7 +16,7 @@
       <a href="index.html" aria-label="Go to homepage">
         <img src="logo/logo-1.png" alt="NoorNext logo" class="site-logo" />
       </a>
-      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
       <nav role="navigation" aria-label="Main Navigation">
         <a href="index.html">Home</a>
         <a href="technology.html">Technology</a>
@@ -118,12 +119,8 @@
         <!-- Center-right: Address -->
         <div class="pre-footer-col">
           <h3>Contact Info</h3>
-          <!-- <p>📍 <strong>Address:</strong> 123 Innovation Ave, Tech Park, CA 94000</p> -->
-          <p>📞 <strong>Phone:</strong> +91 808 4077 808</p>
-          <p>
-            ✉️ <strong>Email:</strong>
-            <a href="mailto:contact@noornext.com">contact@noornext.com</a>
-          </p>
+          <p><strong>Phone:</strong> +91 808 4077 808</p>
+          <p><strong>Email:</strong> <a href="mailto:contact@noornext.com">contact@noornext.com</a></p>
         </div>
 
         <!-- Right: Site Map & Legal -->
@@ -134,7 +131,7 @@
             <li><a href="technology.html">Technology</a></li>
             <li><a href="careers.html">Careers</a></li>
             <li><a href="updates.html">Updates</a></li>
-            <li><a href="contact us.html">Contact Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
           </ul>
         </div>
 
@@ -149,52 +146,10 @@
     </section>
 
     <footer>
-      © 2025 <strong>NoorNext</strong> Company. All rights reserved.
+      &copy; 2026 <strong>NoorNext</strong> Company. All rights reserved.
+      <span class="footer-credit">Designed by <a href="https://strangesolution.com" target="_blank" rel="noopener">StrangeSolution.Com</a></span>
     </footer>
 
     <script src="script.js"></script>
-    <script>
-      (function(){
-        const form = document.getElementById('contact-form');
-        const resp = document.getElementById('contact-response');
-        if (!form) return;
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          resp.textContent = '';
-          const name = document.getElementById('contact-name').value.trim();
-          const email = document.getElementById('contact-email').value.trim();
-          const message = document.getElementById('contact-message').value.trim();
-          if (!name || !email || !message) {
-            resp.textContent = 'Please complete all fields.';
-            return;
-          }
-          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-            resp.textContent = 'Invalid email address.';
-            return;
-          }
-
-          const backend = (window.BACKEND_URL ? (window.BACKEND_URL + '/contact') : '/backend/form-handler.php?type=contact');
-          const fd = new FormData();
-          fd.append('name', name);
-          fd.append('email', email);
-          fd.append('message', message);
-
-          try {
-            resp.textContent = 'Submitting...';
-            const res = await fetch(backend, { method: 'POST', body: fd });
-            const json = await res.json().catch(() => null);
-            if (!res.ok) {
-              resp.textContent = (json && json.message) || 'Submission failed';
-              return;
-            }
-            resp.textContent = (json && json.message) || 'Message sent. Thank you!';
-            form.reset();
-          } catch (err) {
-            console.error(err);
-            resp.textContent = 'Submission failed — check network or try later.';
-          }
-        });
-      })();
-    </script>
-  </body>
+</body>
 </html>

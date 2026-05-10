@@ -1,38 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NoorNext | Internship Detail</title>
     <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="logo/logo-1.png" />
     <link rel="apple-touch-icon" href="logo/logo.png" />
     <link rel="shortcut icon" href="logo/logo-head.png" />
     <link rel="stylesheet" href="style.css" />
-
-    <script>
-      // Set your backend URL here after deploying the backend
-      window.BACKEND_URL = "https://api.noornext.com"; // Deployed backend URL
-    </script>
   </head>
   <body>
-    <!-- Quick runtime marker to confirm scripts run -->
-    <script>
-      try {
-        const m = document.createElement("div");
-        m.id = "dev-marker";
-        m.style.cssText =
-          "position:fixed;top:8px;right:8px;background:#0b74de;color:#fff;padding:6px 8px;border-radius:6px;z-index:99999;font-family:sans-serif;font-size:12px";
-        m.textContent = "JS: running";
-        document.body.appendChild(m);
-      } catch (e) {
-        /* ignore */
-      }
-    </script>
     <header>
       <a href="index.html" aria-label="Go to homepage"
         ><img src="logo/logo-1.png" alt="NoorNext" class="site-logo"
       /></a>
-      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
       <nav>
         <a href="index.html">Home</a>
         <a href="technology.html">Technology</a>
@@ -79,7 +62,7 @@
         try {
           // show loading marker
           try {
-            container.innerHTML = "<p>Loading internship details…</p>";
+            container.innerHTML = "<p>Loading internship details...</p>";
           } catch (e) {}
           let internships = null;
           try {
@@ -147,8 +130,8 @@
             internship.title
           }</h1>\n          ${idealFor}\n          <div class="job-meta">${
             internship.location || ""
-          } ${internship.type ? " • " + internship.type : ""} ${
-            internship.duration ? " • " + internship.duration : ""
+          } ${internship.type ? " &middot; " + internship.type : ""} ${
+            internship.duration ? " &middot; " + internship.duration : ""
           }</div>\n          <div class="job-details">${
             internship.details
               ? internship.details
@@ -157,7 +140,7 @@
                 "</p>"
           }</div>\n          ${rolesHtml}\n\n          <form id="apply-form" class="apply-form" enctype="multipart/form-data" novalidate>\n            <label for="app-name">Full name</label>\n            <input id="app-name" name="name" type="text" required>\n\n            <label for="app-email">Email</label>\n            <input id="app-email" name="email" type="email" required>\n\n            <label for="app-college">College / Organization</label>\n            <input id="app-college" name="college" type="text" required>\n\n            <label for="app-note">Note</label>\n            <textarea id="app-note" name="note" rows="4" required></textarea>\n\n            <label for="app-resume">Upload resume (PDF only)</label>\n            <input id="app-resume" name="resume" type="file" accept="application/pdf" required>\n\n            <div class="apply-actions" style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">\n              <button type="button" class="btn" id="go-back">Back</button>\n              <button type="submit" class="btn primary">Submit</button>\n            </div>\n            <div id="apply-message" aria-live="polite" style="margin-top:12px"></div>\n          </form>\n        `;
 
-          // wire up form — submit to backend endpoint
+          // wire up form - submit to backend endpoint
           const form = document.getElementById("apply-form");
           if (form) form.noValidate = false;
           const msg = document.getElementById("apply-message");
@@ -184,7 +167,7 @@
               return;
             }
 
-            const backend = (window.BACKEND_URL ? (window.BACKEND_URL + "/apply/internship") : "/backend/form-handler.php?type=internship");
+            const backend = "backend/form-handler.php?type=internship";
             const fd = new FormData();
             fd.append("name", name);
             fd.append("email", email);
@@ -198,7 +181,8 @@
               const res = await fetch(backend, { method: "POST", body: fd });
               const json = await res.json().catch(() => null);
               if (!res.ok) {
-                msg.textContent = (json && json.error) || "Submission failed";
+                msg.textContent =
+                  (json && (json.message || json.error)) || "Submission failed";
                 return;
               }
               msg.textContent =
@@ -207,7 +191,7 @@
             } catch (err) {
               console.error(err);
               msg.textContent =
-                "Submission failed — check your network or try again later.";
+                "Submission failed - check your network or try again later.";
             }
           });
 
@@ -229,7 +213,9 @@
     </script>
 
     <footer>
-      © 2025 <strong>NoorNext</strong> Company. All rights reserved.
+      &copy; 2026 <strong>NoorNext</strong> Company. All rights reserved.
+      <span class="footer-credit">Designed by <a href="https://strangesolution.com" target="_blank" rel="noopener">StrangeSolution.Com</a></span>
     </footer>
+      <script src="script.js"></script>
   </body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NoorNext | Job Detail</title>
     <link rel="icon" type="image/png" sizes="32x32" href="logo/logo-head.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="logo/logo-1.png" />
@@ -10,17 +11,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="logo/br-icon.png" />
     <link rel="shortcut icon" href="logo/br-icon.png" />
     <link rel="stylesheet" href="style.css" />
-    <script>
-      // Set your backend URL here after deploying the backend
-      window.BACKEND_URL = "https://api.noornext.com"; // Deployed backend URL
-    </script>
   </head>
   <body>
     <header>
       <a href="index.html" aria-label="Go to homepage"
         ><img src="logo/logo-1.png" alt="NoorNext" class="site-logo"
       /></a>
-      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
       <nav>
         <a href="index.html">Home</a>
         <a href="technology.html">Technology</a>
@@ -76,7 +73,7 @@
           const job = jobs[id];
           container.innerHTML = `
           <h1>${job.title}</h1>
-          <div class="job-meta">${job.location} • ${job.type}</div>
+          <div class="job-meta">${job.location} &middot; ${job.type}</div>
           <div class="job-details">${
             job.details ? job.details : "<p>" + (job.summary || "") + "</p>"
           }</div>
@@ -102,7 +99,7 @@
           </form>
         `;
 
-          // wire up form — submit to backend rather than mailto
+          // wire up form - submit to backend rather than mailto
           const form = document.getElementById("apply-form");
           if (form) form.noValidate = false;
           const msg = document.getElementById("apply-message");
@@ -129,7 +126,7 @@
               return;
             }
 
-            const backend = (window.BACKEND_URL ? (window.BACKEND_URL + "/apply/job") : "/backend/form-handler.php?type=job");
+            const backend = "backend/form-handler.php?type=job";
             const fd = new FormData();
             fd.append("name", name);
             fd.append("email", email);
@@ -142,7 +139,8 @@
               const res = await fetch(backend, { method: "POST", body: fd });
               const json = await res.json().catch(() => null);
               if (!res.ok) {
-                msg.textContent = (json && json.error) || "Submission failed";
+                msg.textContent =
+                  (json && (json.message || json.error)) || "Submission failed";
                 return;
               }
               msg.textContent =
@@ -151,7 +149,7 @@
             } catch (err) {
               console.error(err);
               msg.textContent =
-                "Submission failed — check your network or try again later.";
+                "Submission failed - check your network or try again later.";
             }
           });
           // Go back button behavior
@@ -170,7 +168,9 @@
     </script>
 
     <footer>
-      © 2025 <strong>NoorNext</strong> Company. All rights reserved.
+      &copy; 2026 <strong>NoorNext</strong> Company. All rights reserved.
+      <span class="footer-credit">Designed by <a href="https://strangesolution.com" target="_blank" rel="noopener">StrangeSolution.Com</a></span>
     </footer>
+      <script src="script.js"></script>
   </body>
 </html>
