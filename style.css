@@ -201,7 +201,7 @@ button:disabled {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transform: scale(1.03);
