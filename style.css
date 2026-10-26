@@ -218,7 +218,7 @@ button:disabled {
 }
 
 #main::before {
-  background-image: url("assets/home/ECO-Scanner_ Portable AI Diagnostics.png");
+  background-image: url("assets/home-bg.png");
 }
 
 #main-1::before {
@@ -251,6 +251,22 @@ button:disabled {
   margin: 22px auto 0;
   color: rgba(255, 255, 255, 0.9);
   font-size: clamp(1rem, 2.5vw, 1.35rem);
+}
+
+.product-showcase {
+  padding: clamp(28px, 5vw, 64px) clamp(18px, 5vw, 72px);
+  background: var(--surface);
+}
+
+.product-showcase img {
+  display: block;
+  width: min(1200px, 100%);
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
 }
 
 .section {
