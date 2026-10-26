@@ -1,28 +1,17 @@
-# Backend Setup for Job and Internship Form Submissions
+# Website Deployment Notes
 
-## Completed Tasks
+## Current form setup
 
-- [x] Verified existing Flask backend in `backend/app.py` with endpoints `/apply/job` and `/apply/internship`
-- [x] Confirmed backend sends emails to 'contact.noornext@gmail.com' by default
-- [x] Created `backend/passenger_wsgi.py` for cPanel deployment
-- [x] Updated `backend/README.md` with cPanel deployment instructions
-- [x] Added `window.BACKEND_URL` script to `job.html` and `internship-detail.html` (set to placeholder URL)
+- The website submits contact, collaboration, job, and internship forms to `backend/form-handler.php`.
+- The handler sends submissions to `contact@noornext.com` using PHP's `mail()` function.
+- Job and internship applications accept PDF attachments up to 10 MB.
+- The root `form-handler.php` file is a compatibility entry point that includes the backend handler.
 
-## Remaining Tasks
+## Deployment checklist
 
-- [ ] Deploy the backend on cPanel:
-  - Upload `backend/` directory to cPanel via File Manager or FTP
-  - In cPanel, go to **Setup Python App** under **Software**
-  - Create a new Python application with Python 3.8+, root `/home/yourusername/backend`, URL e.g., `api.yourdomain.com`, startup file `passenger_wsgi.py`
-  - Install dependencies: `pip install -r requirements.txt`
-  - Set environment variables: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, etc.
-  - Restart the Python app
-- [ ] Update `window.BACKEND_URL` in `job.html` and `internship-detail.html` to the actual deployed backend URL (e.g., `https://api.yourdomain.com`)
-- [ ] Test the form submissions to ensure emails are received at 'contact.noornext@gmail.com'
-- [ ] Optionally, restrict CORS origins in `backend/app.py` for production security
+- [ ] Deploy the site to a PHP-enabled web host and include `backend/form-handler.php`.
+- [ ] Confirm the host's PHP mail service is configured to send mail from `no-reply@noornext.com` to `contact@noornext.com`.
+- [ ] Submit a contact message, collaboration inquiry, job application, and internship application on the deployed site; confirm each reaches the recipient.
+- [ ] Confirm HTTPS is enabled so form submissions and uploaded resumes are sent securely.
 
-## Notes
-
-- The backend uses Python Flask and is configured for production deployment on cPanel using Passenger WSGI.
-- SMTP credentials are required for email functionality; set them in cPanel's Python app environment variables.
-- The static site (HTML, CSS, JS) should already be deployed via the existing `.cpanel.yml` configuration.
+The `.cpanel.yml` file copies the static site and PHP handler into the cPanel `public_html` directory. This project currently has no Flask application, Passenger WSGI entry point, or separate API URL configured.
