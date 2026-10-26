@@ -201,7 +201,8 @@ button:disabled {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   transform: scale(1.03);
 }
@@ -217,7 +218,7 @@ button:disabled {
 }
 
 #main::before {
-  background-image: url("assets/home-bg.png");
+  background-image: url("assets/home/ECO-Scanner_ Portable AI Diagnostics.png");
 }
 
 #main-1::before {
