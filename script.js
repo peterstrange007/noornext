@@ -1,5 +1,5 @@
 (function () {
-  const endpoint = (type) => `backend/form-handler.php?type=${encodeURIComponent(type)}`;
+  const endpoint = (type) => `form-handler.php?type=${encodeURIComponent(type)}`;
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const escapeHtml = (value) =>
@@ -89,7 +89,7 @@
     });
 
     document.querySelectorAll("nav a").forEach((link) => {
-      const current = decodeURIComponent(location.pathname.split("/").pop() || "index.html");
+      const current = decodeURIComponent(location.pathname.split("/").pop() || "index");
       const target = decodeURIComponent((link.getAttribute("href") || "").split("/").pop());
       if (target === current) {
         link.classList.add("active");
@@ -150,7 +150,7 @@
                 <p class="job-meta">${escapeHtml(job.location)} &middot; ${escapeHtml(job.type)}</p>
               </div>
               <p>${escapeHtml(job.summary)}</p>
-              <a class="btn" href="job.html?id=${index}">Apply Now</a>
+              <a class="btn" href="/job?id=${index}">Apply Now</a>
             </article>
           `
         )
@@ -183,7 +183,7 @@
                 <p class="job-meta">${meta}</p>
               </div>
               <p>${escapeHtml(item.description || item.summary || "")}</p>
-              <a class="btn" href="internship-detail.html?id=${detailId}">Apply Now</a>
+              <a class="btn" href="/internship-detail?id=${detailId}">Apply Now</a>
             </article>
           `;
         })

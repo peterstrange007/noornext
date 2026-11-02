@@ -12,16 +12,16 @@
   </head>
   <body>
     <header>
-      <a href="index.html" aria-label="Go to homepage"
+      <a href="/index" aria-label="Go to homepage"
         ><img src="logo/logo-1.png" alt="NoorNext" class="site-logo"
       /></a>
       <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
       <nav>
-        <a href="index.html">Home</a>
-        <a href="technology.html">Technology</a>
-        <a href="careers.html">Career</a>
-        <a href="updates.html">Updates</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="/index">Home</a>
+        <a href="/technology">Technology</a>
+        <a href="/careers">Career</a>
+        <a href="/updates">Updates</a>
+        <a href="/contact">Contact Us</a>
         <button id="toggle-dark" class="dark-toggle">Dark Mode</button>
       </nav>
     </header>
@@ -50,7 +50,7 @@
         const debug = reason
           ? `<pre style="white-space:pre-wrap">${reason}</pre>`
           : "";
-        container.innerHTML = `<h2>Internship not found</h2><p><a href="internship.html">Back to Internships</a></p>${debug}`;
+        container.innerHTML = `<h2>Internship not found</h2><p><a href="/internship">Back to Internships</a></p>${debug}`;
         console.warn("Internship detail not found:", {
           reason,
           query: location.search,
@@ -166,7 +166,7 @@
               return;
             }
 
-            const backend = "backend/form-handler.php?type=internship";
+            const backend = "form-handler.php?type=internship";
             const fd = new FormData();
             fd.append("name", name);
             fd.append("email", email);
@@ -197,14 +197,14 @@
           const goBackBtn = document.getElementById("go-back");
           if (goBackBtn)
             goBackBtn.addEventListener("click", () => {
-              location.href = "internship.html";
+              location.href = "/internship";
             });
         } catch (err) {
           console.error("internship load error", err);
           try {
             container.innerHTML = `<h2>Error</h2><pre style="white-space:pre-wrap">${String(
               err && (err.message || err)
-            )}</pre><p><a href="internship.html">Back to Internships</a></p>`;
+            )}</pre><p><a href="/internship">Back to Internships</a></p>`;
           } catch (e) {}
         }
       };

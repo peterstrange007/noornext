@@ -3,3 +3,5 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/wihmqznxgg4u/public_html/
     - /bin/cp -R *.html *.css *.js *.json *.php .htaccess favicon.svg logo icons assets backend $DEPLOYPATH
+    - /bin/find $DEPLOYPATH/assets $DEPLOYPATH/logo $DEPLOYPATH/icons -type d -exec /bin/chmod 755 {} +
+    - /bin/find $DEPLOYPATH/assets $DEPLOYPATH/logo $DEPLOYPATH/icons -type f -exec /bin/chmod 644 {} +
