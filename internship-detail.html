@@ -47,11 +47,10 @@
       const container = document.getElementById("internship-detail");
 
       const renderNotFound = (reason) => {
-        const qs = location.search || "(none)";
         const debug = reason
           ? `<pre style="white-space:pre-wrap">${reason}</pre>`
           : "";
-        container.innerHTML = `<h2>Internship not found</h2><p><a href="internship.html">Back to Internships</a></p>${debug}<p>Query: ${qs}</p>`;
+        container.innerHTML = `<h2>Internship not found</h2><p><a href="internship.html">Back to Internships</a></p>${debug}`;
         console.warn("Internship detail not found:", {
           reason,
           query: location.search,
