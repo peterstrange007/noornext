@@ -240,7 +240,7 @@ button:disabled {
 }
 
 #main::before {
-  display: none;
+  background-image: url("assets/home/ECO-Scanner_ Portable AI Diagnostics.png");
 }
 
 #main-1::before {
