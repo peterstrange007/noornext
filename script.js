@@ -74,6 +74,10 @@
       document.body.classList.toggle("dark-mode");
       localStorage.setItem("darkMode", String(document.body.classList.contains("dark-mode")));
       syncLabel();
+      document.body.classList.remove("nav-open");
+      document.querySelectorAll(".menu-toggle").forEach((button) => {
+        button.setAttribute("aria-expanded", "false");
+      });
     });
   };
 

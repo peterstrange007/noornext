@@ -211,7 +211,7 @@ button:disabled {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: clamp(460px, 70vh, 780px);
+  min-height: clamp(560px, 70vh, 780px);
   padding: clamp(96px, 12vw, 150px) clamp(18px, 5vw, 72px);
   overflow: hidden;
   text-align: center;
@@ -260,10 +260,10 @@ button:disabled {
 }
 
 .hero h1 {
-  max-width: 980px;
+  max-width: 780px;
   margin: 0;
   color: #fff;
-  font-size: clamp(2.25rem, 7vw, 5.75rem);
+  font-size: clamp(2.rem, 7vw, 5.75rem);
   line-height: 0.98;
   letter-spacing: 0;
 }
@@ -1193,6 +1193,12 @@ footer {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 520ms ease, transform 520ms ease;
+}
+
+#main-2 + .section.reveal,
+#main-2 + .section .reveal {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
