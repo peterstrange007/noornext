@@ -348,6 +348,12 @@ button:disabled {
   text-align: center;
 }
 
+.technology-hero .page-hero-copy > .hero-kicker {
+  width: 100%;
+  margin-inline: auto;
+  text-align: center;
+}
+
 .technology-hero .page-hero-copy h1 {
   margin: 0 auto;
   text-align: center;
